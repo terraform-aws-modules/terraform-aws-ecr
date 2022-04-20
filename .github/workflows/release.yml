@@ -1,31 +1,28 @@
-name: release
+name: Release
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
     paths:
-      - '**.tf'
-      - '**.tmpl'
-      - '!examples/**.tf'
-      - '.github/workflows/semantic-releaser.yml'
+      - '**/*.tpl'
+      - '**/*.py'
+      - '**/*.tf'
+      - '.github/workflows/release.yml'
 
 jobs:
   release:
-    name: release
+    name: Release
     runs-on: ubuntu-latest
+    # Skip running release workflow on forks
+    if: github.repository_owner == 'terraform-aws-modules'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           persist-credentials: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
+          fetch-depth: 0
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
@@ -36,4 +33,4 @@ jobs:
             @semantic-release/git@10.0.0
             conventional-changelog-conventionalcommits@4.6.3
         env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE }}
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}

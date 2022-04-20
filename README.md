@@ -4,13 +4,13 @@ Terraform module which creates AWS ECR resources.
 
 ## Usage
 
-See [`examples`](https://github.com/clowdhaus/terraform-aws-ecr/tree/main/examples) directory for working examples to reference:
+See [`examples`](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/main/examples) directory for working examples to reference:
 
 ### Private Repository
 
 ```hcl
 module "ecr" {
-  source = "clowdhaus/ecr/aws"
+  source = "terraform-aws-modules/ecr/aws"
 
   repository_name = "private-example"
 
@@ -44,7 +44,7 @@ module "ecr" {
 
 ```hcl
 module "public_ecr" {
-  source = "clowdhaus/ecr/aws"
+  source = "terraform-aws-modules/ecr/aws"
 
   repository_name = "public-example"
   repository_type = "public"
@@ -88,7 +88,7 @@ module "public_ecr" {
 
 ```hcl
 module "ecr_registry" {
-  source = "clowdhaus/ecr/aws"
+  source = "terraform-aws-modules/ecr/aws"
 
   repository_name = "registry-example"
 
@@ -166,16 +166,16 @@ module "ecr_registry" {
 
 ## Examples
 
-Examples codified under the [`examples`](https://github.com/clowdhaus/terraform-aws-ecr/tree/main/examples) are intended to give users references for how to use the module(s) as well as testing/validating changes to the source code of the module. If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
+Examples codified under the [`examples`](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/main/examples) are intended to give users references for how to use the module(s) as well as testing/validating changes to the source code of the module. If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
-- [Complete](https://github.com/clowdhaus/terraform-aws-ecr/tree/main/examples/complete)
+- [Complete](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/main/examples/complete)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
@@ -244,4 +244,4 @@ No modules.
 
 ## License
 
-Apache-2.0 Licensed. See [LICENSE](https://github.com/clowdhaus/terraform-aws-ecr/blob/main/LICENSE).
+Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-ecr/blob/main/LICENSE).
