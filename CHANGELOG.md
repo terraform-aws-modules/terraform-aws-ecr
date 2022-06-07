@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.1.1...v1.2.0) (2022-06-07)
+
+
+### Features
+
+* Add wrapper module and pre-commit hook ([#3](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/3)) ([c2284be](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/c2284be33c572839d178bcbcf53f1eaaebe5016c))
+
 ### [1.1.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.1.0...v1.1.1) (2022-04-21)
 
 
