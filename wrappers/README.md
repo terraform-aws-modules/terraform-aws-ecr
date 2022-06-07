@@ -64,30 +64,33 @@ module "wrapper" {
 }
 ```
 
-## Example: Manage multiple ECR repos in one Terragrunt layer
+## Example: Manage multiple S3 buckets in one Terragrunt layer
 
-`eu-west-1/ecr-repos/terragrunt.hcl`:
+`eu-west-1/s3-buckets/terragrunt.hcl`:
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/terraform-aws-ecr/aws//wrappers"
+  source = "tfr:///terraform-aws-modules/s3-bucket/aws//wrappers"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-ecr.git?ref=master//wrappers"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-s3-bucket.git?ref=master//wrappers"
 }
 
 inputs = {
   defaults = {
-    create = true
+    force_destroy = true
 
-    repository_image_tag_mutability = IMMUTABLE
+    attach_elb_log_delivery_policy        = true
+    attach_lb_log_delivery_policy         = true
+    attach_deny_insecure_transport_policy = true
+    attach_require_latest_tls_policy      = true
   }
 
   items = {
-    ecr1 = {
-      repository_name = "my-random-ecr-image-1"
+    bucket1 = {
+      bucket = "my-random-bucket-1"
     }
-    ecr2 = {
-      repository_name = "my-random-ecr-image-2"
+    bucket2 = {
+      bucket = "my-random-bucket-2"
       tags = {
         Secure = "probably"
       }
