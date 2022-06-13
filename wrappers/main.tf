@@ -16,6 +16,7 @@ module "wrapper" {
   create_repository_policy                  = try(each.value.create_repository_policy, var.defaults.create_repository_policy, true)
   repository_read_access_arns               = try(each.value.repository_read_access_arns, var.defaults.repository_read_access_arns, [])
   repository_read_write_access_arns         = try(each.value.repository_read_write_access_arns, var.defaults.repository_read_write_access_arns, [])
+  create_lifecycle_policy                   = try(each.value.create_lifecycle_policy, var.defaults.create_lifecycle_policy, true)
   repository_lifecycle_policy               = try(each.value.repository_lifecycle_policy, var.defaults.repository_lifecycle_policy, "")
   public_repository_catalog_data            = try(each.value.public_repository_catalog_data, var.defaults.public_repository_catalog_data, {})
   create_registry_policy                    = try(each.value.create_registry_policy, var.defaults.create_registry_policy, false)
