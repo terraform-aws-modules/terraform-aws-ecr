@@ -91,7 +91,7 @@ variable "repository_read_write_access_arns" {
 variable "create_lifecycle_policy" {
   description = "Determines whether a lifecycle policy will be created"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "repository_lifecycle_policy" {
