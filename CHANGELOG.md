@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.2.0...v1.3.0) (2022-06-13)
+
+
+### Features
+
+* Add a new variable to control the creation of a lifecycle policy ([#4](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/4)) ([18c0515](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/18c05151fa481a02a93ba2ab549842b0e5bddf1a))
+
 ## [1.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.1.1...v1.2.0) (2022-06-07)
 
 
