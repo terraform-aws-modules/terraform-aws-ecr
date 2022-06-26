@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.3.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.0...v1.3.1) (2022-06-26)
+
+
+### Bug Fixes
+
+* Update the permission for the public ecr ([#7](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/7)) ([70f3252](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/70f3252311f29bc9dc3ea6e72ec2abb70c387eb1))
+
 ## [1.3.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.2.0...v1.3.0) (2022-06-13)
 
 
