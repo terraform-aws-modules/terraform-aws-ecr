@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.3.2](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.1...v1.3.2) (2022-06-26)
+
+
+### Bug Fixes
+
+* Add new variable to control whether a repository policy is attached to the repository ([#8](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/8)) ([4706acf](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/4706acfd9137a1bd2ccf918767c48ec73b99dfbd))
+
 ### [1.3.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.0...v1.3.1) (2022-06-26)
 
 
