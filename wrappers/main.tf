@@ -13,6 +13,7 @@ module "wrapper" {
   repository_kms_key                        = try(each.value.repository_kms_key, var.defaults.repository_kms_key, null)
   repository_image_scan_on_push             = try(each.value.repository_image_scan_on_push, var.defaults.repository_image_scan_on_push, true)
   repository_policy                         = try(each.value.repository_policy, var.defaults.repository_policy, null)
+  attach_repository_policy                  = try(each.value.attach_repository_policy, var.defaults.attach_repository_policy, true)
   create_repository_policy                  = try(each.value.create_repository_policy, var.defaults.create_repository_policy, true)
   repository_read_access_arns               = try(each.value.repository_read_access_arns, var.defaults.repository_read_access_arns, [])
   repository_read_write_access_arns         = try(each.value.repository_read_write_access_arns, var.defaults.repository_read_write_access_arns, [])
