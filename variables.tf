@@ -62,6 +62,12 @@ variable "repository_policy" {
   default     = null
 }
 
+variable "repository_force_delete" {
+  description = "If `true`, will delete the repository even if it contains images. Defaults to `false`"
+  type        = bool
+  default     = null
+}
+
 ################################################################################
 # Repository Policy
 ################################################################################
