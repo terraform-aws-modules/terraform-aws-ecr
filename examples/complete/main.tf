@@ -51,6 +51,8 @@ module "ecr" {
     ]
   })
 
+  repository_force_delete = true
+
   tags = local.tags
 }
 
