@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.2...v1.4.0) (2022-07-14)
+
+
+### Features
+
+* Add support for `force_delete` attribute ([#9](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/9)) ([850ddb0](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/850ddb0a35188785b3dee3e64ad8833175f7376e))
+
 ### [1.3.2](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.1...v1.3.2) (2022-06-26)
 
 
