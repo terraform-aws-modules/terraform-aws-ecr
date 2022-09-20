@@ -135,7 +135,7 @@ resource "aws_ecr_repository_policy" "this" {
   count = local.create_private_repository && var.attach_repository_policy ? 1 : 0
 
   repository = aws_ecr_repository.this[0].name
-  policy     = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
+  policy     = var.create_repository_policy ? var.repository_policy : data.aws_iam_policy_document.repository[0].json
 }
 
 ################################################################################
