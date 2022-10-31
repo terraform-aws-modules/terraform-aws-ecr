@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.4.0...v1.5.0) (2022-10-31)
+
+
+### Features
+
+* Added ecr:GetAuthorizationToken for private ECR with Docker capabilities ([#12](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/12)) ([0a087ca](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/0a087ca8c2d9097fe2b73e112549739962114c9f))
+
 ## [1.4.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.3.2...v1.4.0) (2022-07-14)
 
 
