@@ -46,6 +46,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       actions = [
+        "ecr:GetAuthorizationToken",
         "ecr:BatchCheckLayerAvailability",
         "ecr:BatchGetImage",
         "ecr:DescribeImageScanFindings",
