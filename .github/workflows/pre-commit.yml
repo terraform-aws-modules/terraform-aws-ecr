@@ -1,8 +1,5 @@
 name: Pre-Commit
 
-permissions:
-  pull-requests: read
-
 on:
   pull_request:
     branches:
