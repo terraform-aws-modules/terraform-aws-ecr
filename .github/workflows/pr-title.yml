@@ -7,16 +7,12 @@ on:
       - edited
       - synchronize
 
-permissions:
-  contents: read
-  deployments: write
-  issues: write
-  pull-requests: write
-
 jobs:
   main:
     name: Validate PR title
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       # Please look up the latest version from
       # https://github.com/amannn/action-semantic-pull-request/releases
