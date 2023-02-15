@@ -1,5 +1,8 @@
 name: "Validate PR title"
 
+permissions:
+  pull-requests: read
+
 on:
   pull_request_target:
     types:
@@ -11,8 +14,6 @@ jobs:
   main:
     name: Validate PR title
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
     steps:
       # Please look up the latest version from
       # https://github.com/amannn/action-semantic-pull-request/releases
