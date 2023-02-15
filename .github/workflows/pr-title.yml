@@ -1,4 +1,10 @@
-name: 'Validate PR title'
+name: "Validate PR title"
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  pull-requests: read
 
 on:
   pull_request_target:
