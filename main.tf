@@ -64,7 +64,7 @@ data "aws_iam_policy_document" "repository" {
 
 
   dynamic "statement" {
-    for_each = var.repository_type == "private" && var.repository_lambda_read_access_arns != [] ? [1] : []
+    for_each = var.repository_type == "private" && length(var.repository_lambda_read_access_arns) > 0 ? [1] : []
 
     content {
       sid = "PrivateLambdaReadOnly"
