@@ -62,6 +62,33 @@ data "aws_iam_policy_document" "repository" {
     }
   }
 
+
+  dynamic "statement" {
+    for_each = var.repository_type == "private" && length(var.repository_lambda_read_access_arns) > 0 ? [1] : []
+
+    content {
+      sid = "PrivateLambdaReadOnly"
+
+      principals {
+        type        = "Service"
+        identifiers = ["lambda.amazonaws.com"]
+      }
+
+      actions = [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+      ]
+
+      condition {
+        test     = "StringLike"
+        variable = "aws:sourceArn"
+
+        values = var.repository_lambda_read_access_arns
+      }
+
+    }
+  }
+
   dynamic "statement" {
     for_each = length(var.repository_read_write_access_arns) > 0 && var.repository_type == "private" ? [var.repository_read_write_access_arns] : []
 
