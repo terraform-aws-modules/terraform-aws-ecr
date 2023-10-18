@@ -204,7 +204,7 @@ resource "aws_ecrpublic_repository" "this" {
 # Public Repository Policy
 ################################################################################
 
-resource "aws_ecrpublic_repository_policy" "example" {
+resource "aws_ecrpublic_repository_policy" "this" {
   count = local.create_public_repository ? 1 : 0
 
   repository_name = aws_ecrpublic_repository.this[0].repository_name
