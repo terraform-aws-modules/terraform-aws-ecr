@@ -64,7 +64,7 @@ data "aws_iam_policy_document" "repository" {
 
 
   dynamic "statement" {
-    for_each = var.repository_type == "private" && length(var.repository_lambda_read_access_arns) > 0 ? [1] : []
+    for_each = var.repository_type == "private" && (var.repository_lambda_read_access || length(var.repository_lambda_read_access_arns) > 0) ? [1] : []
 
     content {
       sid = "PrivateLambdaReadOnly"
@@ -78,13 +78,6 @@ data "aws_iam_policy_document" "repository" {
         "ecr:BatchGetImage",
         "ecr:GetDownloadUrlForLayer",
       ]
-
-      condition {
-        test     = "StringLike"
-        variable = "aws:sourceArn"
-
-        values = var.repository_lambda_read_access_arns
-      }
 
     }
   }

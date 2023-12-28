@@ -90,10 +90,15 @@ variable "repository_read_access_arns" {
   default     = []
 }
 
+variable "repository_lambda_read_access" {
+  description = "Determines whether the repository policy will allow read access to the repository for all lambda functions in the account"
+  type        = bool
+  default     = false
+}
 variable "repository_lambda_read_access_arns" {
-  description = "The ARNs of the Lambda service roles that have read access to the repository"
-  type        = list(string)
-  default     = []
+  description = "Deprecated. Use `repository_lambda_read_access` instead"
+  type        = []
+  default     = list(string)
 }
 
 variable "repository_read_write_access_arns" {
