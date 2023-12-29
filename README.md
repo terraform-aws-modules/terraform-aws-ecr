@@ -215,6 +215,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="allow_cross_account_lambda_read_access"></a> [allow\_cross\_account\_lambda\_read\_access](#input\_cross\_account\_lambda\_read\_access) | Determines whether the repository policy will allow cross account lambda read access. Required `cross_account_ids`, `cross_account_read_access_lambda_arns` | `bool` | `false` | no |
+| <a name="cross_account_account_ids"></a> [cross\_account\_ids](#input\_cross\_account\_ids) | Cross account ids. Required `allow_cross_account_lambda_read_access`, `cross_account_read_access_lambda_arns` | `list(str)` | `[]` | no |
+| <a name="cross_account_read_access_lambda_arns"></a> [cross\_account\_read\_access\_lambda\_arns](#input\_cross\_account\_read\_access\_lambda\_arns) | Cross account lambda function arns. Required `allow_cross_account_lambda_read_access`, `cross_account_ids` | `list(str)` | `[]` | no |
 | <a name="input_attach_repository_policy"></a> [attach\_repository\_policy](#input\_attach\_repository\_policy) | Determines whether a repository policy will be attached to the repository | `bool` | `true` | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether resources will be created (affects all resources) | `bool` | `true` | no |
 | <a name="input_create_lifecycle_policy"></a> [create\_lifecycle\_policy](#input\_create\_lifecycle\_policy) | Determines whether a lifecycle policy will be created | `bool` | `true` | no |

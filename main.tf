@@ -81,6 +81,66 @@ data "aws_iam_policy_document" "repository" {
 
     }
   }
+  dynamic "statement" {
+    for_each = var.repository_type == "private" && (var.repository_lambda_read_access || length(var.repository_lambda_read_access_arns) > 0) ? [1] : []
+
+    content {
+      sid = "PrivateLambdaReadOnly"
+
+      principals {
+        type        = "Service"
+        identifiers = ["lambda.amazonaws.com"]
+      }
+
+      actions = [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+      ]
+
+    }
+  }
+  dynamic "statement" {
+    for_each = var.repository_type == "private" && (var.allow_cross_account_lambda_read_access || length(var.cross_account_ids) > 0) ? [1] : []
+
+    content {
+      sid    = "CrossAccountPermission"
+      effect = "Allow"
+
+      actions = [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+      ]
+
+      principals {
+        type        = "AWS"
+        identifiers = [for s in var.cross_account_ids : "arn:aws:iam::${s}:root"]
+      }
+    }
+  }
+  dynamic "statement" {
+    for_each = var.repository_type == "private" && (var.allow_cross_account_lambda_read_access || length(var.cross_account_read_access_lambda_arns) > 0) ? [1] : []
+
+    content {
+      sid    = "LambdaECRImageCrossAccountRetrievalPolicy"
+      effect = "Allow"
+
+      actions = [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+      ]
+
+      condition {
+        test     = "StringLike"
+        variable = "aws:sourceARN"
+        values   = var.cross_account_read_access_lambda_arns
+      }
+
+      principals {
+        type        = "Service"
+        identifiers = ["lambda.amazonaws.com"]
+      }
+    }
+  }
 
   dynamic "statement" {
     for_each = length(var.repository_read_write_access_arns) > 0 && var.repository_type == "private" ? [var.repository_read_write_access_arns] : []

@@ -95,6 +95,21 @@ variable "repository_lambda_read_access" {
   type        = bool
   default     = false
 }
+variable "allow_cross_account_lambda_read_access" {
+  description = "Determines whether the repository policy will allow cross account lambda read access. Required `cross_account_ids`, `cross_account_read_access_lambda_arns`"
+  type        = bool
+  default     = false
+}
+variable "cross_account_ids" {
+  description = "Cross account ids. Required `allow_cross_account_lambda_read_access`, `cross_account_read_access_lambda_arns`"
+  type        = list(string)
+  default     = []
+}
+variable "cross_account_read_access_lambda_arns" {
+  description = "Cross account lambda function arns. Required `allow_cross_account_lambda_read_access`, `cross_account_ids`"
+  type        = list(string)
+  default     = []
+}
 variable "repository_lambda_read_access_arns" {
   description = "Deprecated. Use `repository_lambda_read_access` instead"
   type        = []
