@@ -62,7 +62,6 @@ data "aws_iam_policy_document" "repository" {
     }
   }
 
-
   dynamic "statement" {
     for_each = var.repository_type == "private" && length(var.repository_lambda_read_access_arns) > 0 ? [1] : []
 
@@ -127,6 +126,47 @@ data "aws_iam_policy_document" "repository" {
         "ecr-public:PutImage",
         "ecr-public:UploadLayerPart",
       ]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.repository_policy_statements
+
+    content {
+      sid           = try(statement.value.sid, null)
+      actions       = try(statement.value.actions, null)
+      not_actions   = try(statement.value.not_actions, null)
+      effect        = try(statement.value.effect, null)
+      resources     = try(statement.value.resources, null)
+      not_resources = try(statement.value.not_resources, null)
+
+      dynamic "principals" {
+        for_each = try(statement.value.principals, [])
+
+        content {
+          type        = principals.value.type
+          identifiers = principals.value.identifiers
+        }
+      }
+
+      dynamic "not_principals" {
+        for_each = try(statement.value.not_principals, [])
+
+        content {
+          type        = not_principals.value.type
+          identifiers = not_principals.value.identifiers
+        }
+      }
+
+      dynamic "condition" {
+        for_each = try(statement.value.conditions, [])
+
+        content {
+          test     = condition.value.test
+          values   = condition.value.values
+          variable = condition.value.variable
+        }
+      }
     }
   }
 }
