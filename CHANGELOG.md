@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.7.0...v1.7.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#28](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/28)) ([1f74cc5](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/1f74cc5b0b5982bb4be0faed117faba1d3b92773))
+
 ## [1.7.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.6.0...v1.7.0) (2024-03-04)
 
 
