@@ -287,9 +287,13 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
     content {
       scan_frequency = rule.value.scan_frequency
 
-      repository_filter {
-        filter      = rule.value.filter
-        filter_type = try(rule.value.filter_type, "WILDCARD")
+      dynamic "repository_filter" {
+        for_each = rule.value.filters
+
+        content {
+          filter      = repository_filter.value.filter
+          filter_type = try(repository_filter.value.filter_type, "WILDCARD")
+        }
       }
     }
   }
