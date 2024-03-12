@@ -100,8 +100,10 @@ module "public_ecr" {
 data "aws_iam_policy_document" "registry" {
   statement {
     principals {
-      type        = "AWS"
-      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"]
+      type = "AWS"
+      identifiers = [
+        "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
+      ]
     }
 
     actions = [
@@ -111,6 +113,24 @@ data "aws_iam_policy_document" "registry" {
     resources = [
       module.ecr.repository_arn,
     ]
+  }
+
+  dynamic "statement" {
+    for_each = toset(["ecr-public", "dockerhub"])
+    content {
+      sid = statement.value
+      principals {
+        type = "AWS"
+        identifiers = [
+          "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
+        ]
+      }
+      actions = [
+        "ecr:CreateRepository",
+        "ecr:BatchImportUpstreamImage"
+      ]
+      resources = ["arn:aws:ecr:us-east-1:012345678901:repository/${statement.value}/*"]
+    }
   }
 }
 
@@ -128,6 +148,13 @@ module "ecr_registry" {
     pub = {
       ecr_repository_prefix = "ecr-public"
       upstream_registry_url = "public.ecr.aws"
+    }
+    dockerhub = {
+      ecr_repository_prefix = "dockerhub"
+      upstream_registry_url = "registry-1.docker.io"
+
+      # Make sure to read https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache-creating-secret.html
+      credential_arn = "arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/dockerhub"
     }
   }
 
@@ -150,18 +177,22 @@ module "ecr_registry" {
   create_registry_replication_configuration = true
   registry_replication_rules = [
     {
-      destinations = [{
-        region      = "us-west-2"
-        registry_id = data.aws_caller_identity.current.account_id
-        }, {
-        region      = "eu-west-1"
-        registry_id = data.aws_caller_identity.current.account_id
-      }]
+      destinations = [
+        {
+          region      = "us-west-2"
+          registry_id = data.aws_caller_identity.current.account_id
+          }, {
+          region      = "eu-west-1"
+          registry_id = data.aws_caller_identity.current.account_id
+        }
+      ]
 
-      repository_filters = [{
-        filter      = "prod-microservice"
-        filter_type = "PREFIX_MATCH"
-      }]
+      repository_filters = [
+        {
+          filter      = "prod-microservice"
+          filter_type = "PREFIX_MATCH"
+        }
+      ]
     }
   ]
 
