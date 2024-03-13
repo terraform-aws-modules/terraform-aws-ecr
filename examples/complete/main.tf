@@ -153,7 +153,7 @@ module "ecr_registry" {
       ecr_repository_prefix = "dockerhub"
       upstream_registry_url = "registry-1.docker.io"
       # Make sure to read https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache-creating-secret.html
-      credential_arn        = "arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/dockerhub"
+      credential_arn = "arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/dockerhub"
     }
   }
 
