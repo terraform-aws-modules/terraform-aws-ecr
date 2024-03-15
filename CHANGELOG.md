@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.7.1...v2.0.0) (2024-03-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Allow multiple scan filters per scan type in registry; Raise MSV of Terraform and AWS provider to 1.0 and 5.0 respectively (#29)
+
+### Features
+
+* Allow multiple scan filters per scan type in registry; Raise MSV of Terraform and AWS provider to 1.0 and 5.0 respectively ([#29](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/29)) ([cbba4fd](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/cbba4fd31f5a7a04b3d57666c409996bf5eb2bdd))
+
 ## [1.7.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.7.0...v1.7.1) (2024-03-07)
 
 
