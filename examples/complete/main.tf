@@ -137,7 +137,7 @@ module "ecr_registry" {
   registry_scan_rules = [
     {
       scan_frequency = "SCAN_ON_PUSH"
-      filters = [
+      filter = [
         {
           filter      = "example1"
           filter_type = "WILDCARD"
@@ -148,7 +148,7 @@ module "ecr_registry" {
       ]
       }, {
       scan_frequency = "CONTINUOUS_SCAN"
-      filters = [
+      filter = [
         {
           filter      = "example"
           filter_type = "WILDCARD"
