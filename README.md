@@ -129,12 +129,23 @@ module "ecr_registry" {
   registry_scan_rules = [
     {
       scan_frequency = "SCAN_ON_PUSH"
-      filter         = "*"
-      filter_type    = "WILDCARD"
-      }, {
+      filter = [
+        {
+          filter      = "example1"
+          filter_type = "WILDCARD"
+        },
+        { filter      = "example2"
+          filter_type = "WILDCARD"
+        }
+      ]
+    }, {
       scan_frequency = "CONTINUOUS_SCAN"
-      filter         = "example"
-      filter_type    = "WILDCARD"
+      filter = [
+        {
+          filter      = "example"
+          filter_type = "WILDCARD"
+        }
+      ]
     }
   ]
 
@@ -181,14 +192,14 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.22 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.22 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 ## Modules
 
