@@ -40,6 +40,7 @@ Note that this example may create resources which will incur monetary charges on
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_dockerhub_credentials"></a> [dockerhub\_credentials](#module\_dockerhub\_credentials) | terraform-aws-modules/secrets-manager/aws | n/a |
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | ../.. | n/a |
 | <a name="module_ecr_disabled"></a> [ecr\_disabled](#module\_ecr\_disabled) | ../.. | n/a |
 | <a name="module_ecr_registry"></a> [ecr\_registry](#module\_ecr\_registry) | ../.. | n/a |
@@ -52,10 +53,13 @@ Note that this example may create resources which will incur monetary charges on
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_dockerhub_credentials"></a> [dockerhub\_credentials](#input\_dockerhub\_credentials) | Dockerhub credentials | <pre>object({<br>    username    = string<br>    accessToken = string<br>  })</pre> | n/a | yes |
 
 ## Outputs
 

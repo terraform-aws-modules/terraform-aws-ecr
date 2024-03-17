@@ -13,8 +13,9 @@ locals {
   }
 }
 
-data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
+data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
 
 ################################################################################
 # ECR Repository
@@ -115,22 +116,38 @@ data "aws_iam_policy_document" "registry" {
     ]
   }
 
-  dynamic "statement" {
-    for_each = toset(["ecr-public", "dockerhub"])
-    content {
-      sid = statement.value
-      principals {
-        type = "AWS"
-        identifiers = [
-          "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
-        ]
-      }
-      actions = [
-        "ecr:CreateRepository",
-        "ecr:BatchImportUpstreamImage"
+  statement {
+    sid = "ecr-public"
+    principals {
+      type = "AWS"
+      identifiers = [
+        format("arn:%s:iam::%s:root", data.aws_partition.current.partition, data.aws_caller_identity.current.account_id)
       ]
-      resources = ["arn:aws:ecr:us-east-1:012345678901:repository/${statement.value}/*"]
     }
+    actions = [
+      "ecr:CreateRepository",
+      "ecr:BatchImportUpstreamImage"
+    ]
+    resources = [
+      format("arn:%s:iam:%s:%s:repository/ecr-public/*", data.aws_partition.current.partition, data.aws_region.current.name, data.aws_caller_identity.current.account_id)
+    ]
+  }
+
+  statement {
+    sid = "dockerhub"
+    principals {
+      type = "AWS"
+      identifiers = [
+        format("arn:%s:iam::%s:root", data.aws_partition.current.partition, data.aws_caller_identity.current.account_id)
+      ]
+    }
+    actions = [
+      "ecr:CreateRepository",
+      "ecr:BatchImportUpstreamImage"
+    ]
+    resources = [
+      format("arn:%s:iam:%s:%s:repository/dockerhub/*", data.aws_partition.current.partition, data.aws_region.current.name, data.aws_caller_identity.current.account_id)
+    ]
   }
 }
 
@@ -152,8 +169,7 @@ module "ecr_registry" {
     dockerhub = {
       ecr_repository_prefix = "dockerhub"
       upstream_registry_url = "registry-1.docker.io"
-      # Make sure to read https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache-creating-secret.html
-      credential_arn = "arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/dockerhub"
+      credential_arn        = module.dockerhub_credentials.secret_arn
     }
   }
 
@@ -194,6 +210,39 @@ module "ecr_registry" {
       ]
     }
   ]
+
+  tags = local.tags
+}
+
+# Make sure to read https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache-creating-secret.html
+module "dockerhub_credentials" {
+  source = "terraform-aws-modules/secrets-manager/aws"
+
+  # Secret names must contain 1-512 Unicode characters and be prefixed with ecr-pullthroughcache/.
+  name_prefix             = "ecr-pullthroughcache/dockerhub-credentials"
+  description             = "Dockerhub credentials"
+  recovery_window_in_days = 30
+
+  secret_string = jsonencode(var.dockerhub_credentials)
+
+  # Policy
+  create_policy       = true
+  block_public_policy = true
+  policy_statements = {
+    read = {
+      sid = "AllowAccountRead"
+      principals = [
+        {
+          type = "AWS"
+          identifiers = [
+            format("arn:%s:iam::%s:root", data.aws_partition.current.partition, data.aws_caller_identity.current.account_id)
+          ]
+        }
+      ]
+      actions   = ["secretsmanager:GetSecretValue"]
+      resources = ["*"]
+    }
+  }
 
   tags = local.tags
 }
