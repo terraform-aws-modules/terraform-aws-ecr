@@ -28,13 +28,13 @@ Note that this example may create resources which will incur monetary charges on
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.37 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.37 |
 
 ## Modules
 
@@ -44,6 +44,7 @@ Note that this example may create resources which will incur monetary charges on
 | <a name="module_ecr_disabled"></a> [ecr\_disabled](#module\_ecr\_disabled) | ../.. | n/a |
 | <a name="module_ecr_registry"></a> [ecr\_registry](#module\_ecr\_registry) | ../.. | n/a |
 | <a name="module_public_ecr"></a> [public\_ecr](#module\_public\_ecr) | ../.. | n/a |
+| <a name="module_secrets_manager_dockerhub_credentials"></a> [secrets\_manager\_dockerhub\_credentials](#module\_secrets\_manager\_dockerhub\_credentials) | terraform-aws-modules/secrets-manager/aws | ~> 1.0 |
 
 ## Resources
 
@@ -51,7 +52,6 @@ Note that this example may create resources which will incur monetary charges on
 |------|------|
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
 
 ## Inputs
 

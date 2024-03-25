@@ -111,6 +111,19 @@ module "ecr_registry" {
         Resource = [
           "arn:aws:ecr:us-east-1:012345678901:repository/*"
         ]
+      }, {
+        Sid    = "dockerhub",
+        Effect = "Allow",
+        Principal = {
+          "AWS" : "arn:aws:iam::012345678901:root"
+        },
+        Action = [
+          "ecr:CreateRepository",
+          "ecr:BatchImportUpstreamImage"
+        ],
+        Resource = [
+          "arn:aws:ecr:us-east-1:012345678901:repository/dockerhub/*"
+        ]
       }
     ]
   })
@@ -120,6 +133,11 @@ module "ecr_registry" {
     pub = {
       ecr_repository_prefix = "ecr-public"
       upstream_registry_url = "public.ecr.aws"
+    }
+    dockerhub = {
+      ecr_repository_prefix = "dockerhub"
+      upstream_registry_url = "registry-1.docker.io"
+      credential_arn        = "arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/dockerhub"
     }
   }
 
@@ -193,13 +211,13 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.37 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.37 |
 
 ## Modules
 

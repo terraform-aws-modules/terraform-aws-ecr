@@ -6,6 +6,8 @@ locals {
   region = "us-east-1"
   name   = "ecr-ex-${replace(basename(path.cwd), "_", "-")}"
 
+  account_id = data.aws_caller_identity.current.account_id
+
   tags = {
     Name       = local.name
     Example    = local.name
@@ -14,7 +16,6 @@ locals {
 }
 
 data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
 
 ################################################################################
 # ECR Repository
@@ -101,16 +102,25 @@ data "aws_iam_policy_document" "registry" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"]
+      identifiers = ["arn:aws:iam::${local.account_id}:root"]
     }
 
-    actions = [
-      "ecr:ReplicateImage",
-    ]
+    actions   = ["ecr:ReplicateImage"]
+    resources = [module.ecr.repository_arn]
+  }
 
-    resources = [
-      module.ecr.repository_arn,
+  statement {
+    sid = "dockerhub"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${local.account_id}:root"]
+    }
+    actions = [
+      "ecr:CreateRepository",
+      "ecr:BatchImportUpstreamImage"
     ]
+    resources = ["arn:aws:ecr-public::${local.account_id}:repository/dockerhub/*"]
   }
 }
 
@@ -128,6 +138,11 @@ module "ecr_registry" {
     pub = {
       ecr_repository_prefix = "ecr-public"
       upstream_registry_url = "public.ecr.aws"
+    }
+    dockerhub = {
+      ecr_repository_prefix = "dockerhub"
+      upstream_registry_url = "registry-1.docker.io"
+      credential_arn        = module.secrets_manager_dockerhub_credentials.secret_arn
     }
   }
 
@@ -159,22 +174,53 @@ module "ecr_registry" {
 
   # Registry Replication Configuration
   create_registry_replication_configuration = true
-  registry_replication_rules = [
-    {
-      destinations = [{
-        region      = "us-west-2"
-        registry_id = data.aws_caller_identity.current.account_id
-        }, {
-        region      = "eu-west-1"
-        registry_id = data.aws_caller_identity.current.account_id
-      }]
+  registry_replication_rules = [{
+    destinations = [{
+      region      = "us-west-2"
+      registry_id = local.account_id
+      }, {
+      region      = "eu-west-1"
+      registry_id = local.account_id
+    }]
 
-      repository_filters = [{
-        filter      = "prod-microservice"
-        filter_type = "PREFIX_MATCH"
+    repository_filters = [{
+      filter      = "prod-microservice"
+      filter_type = "PREFIX_MATCH"
+    }]
+  }]
+
+  tags = local.tags
+}
+
+module "secrets_manager_dockerhub_credentials" {
+  source  = "terraform-aws-modules/secrets-manager/aws"
+  version = "~> 1.0"
+
+  # Secret names must contain 1-512 Unicode characters and be prefixed with ecr-pullthroughcache/
+  name_prefix = "ecr-pullthroughcache/dockerhub-credentials"
+  description = "Dockerhub credentials"
+
+  # For example only
+  recovery_window_in_days = 0
+  secret_string = jsonencode({
+    username    = "example"
+    accessToken = "YouShouldNotStoreThisInPlainText"
+  })
+
+  # Policy
+  create_policy       = true
+  block_public_policy = true
+  policy_statements = {
+    read = {
+      sid = "AllowAccountRead"
+      principals = [{
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${local.account_id}:root"]
       }]
+      actions   = ["secretsmanager:GetSecretValue"]
+      resources = ["*"]
     }
-  ]
+  }
 
   tags = local.tags
 }
