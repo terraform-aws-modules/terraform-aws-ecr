@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.0.0...v2.1.0) (2024-03-25)
+
+
+### Features
+
+* Add `credentials_arn` to support ECR pull through cache ([#30](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/30)) ([05e6fd0](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/05e6fd073519aa61e880e6a3b4712d67087ea77f))
+
 ## [2.0.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v1.7.1...v2.0.0) (2024-03-15)
 
 
