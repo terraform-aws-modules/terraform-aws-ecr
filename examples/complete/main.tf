@@ -175,15 +175,13 @@ module "ecr_registry" {
   # Registry Replication Configuration
   create_registry_replication_configuration = true
   registry_replication_rules = [{
-    destinations = [
-      {
-        region      = "us-west-2"
-        registry_id = local.account_id
-        }, {
-        region      = "eu-west-1"
-        registry_id = local.account_id
-      }
-    ]
+    destinations = [{
+      region      = "us-west-2"
+      registry_id = local.account_id
+      }, {
+      region      = "eu-west-1"
+      registry_id = local.account_id
+    }]
 
     repository_filters = [{
       filter      = "prod-microservice"
@@ -215,12 +213,10 @@ module "secrets_manager_dockerhub_credentials" {
   policy_statements = {
     read = {
       sid = "AllowAccountRead"
-      principals = [
-        {
-          type        = "AWS"
-          identifiers = ["arn:aws:iam::${local.account_id}:root"]
-        }
-      ]
+      principals = [{
+        type        = "AWS"
+        identifiers = ["arn:aws:iam::${local.account_id}:root"]
+      }]
       actions   = ["secretsmanager:GetSecretValue"]
       resources = ["*"]
     }
