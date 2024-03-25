@@ -120,6 +120,12 @@ module "ecr_registry" {
     pub = {
       ecr_repository_prefix = "ecr-public"
       upstream_registry_url = "public.ecr.aws"
+    },
+    github = {
+        ecr_repository_prefix = "github"
+        upstream_registry_url = "ghrc.io"
+        credential_arn        = "arn:aws:secretsmanager:us-east-1:012345678901:secret:example"
+      }
     }
   }
 
