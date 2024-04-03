@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.1.0...v2.1.1) (2024-04-03)
+
+
+### Bug Fixes
+
+* Correct typo `credentials_arn` -> `credential_arn` ([#36](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/36)) ([b5bd6a4](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/b5bd6a4cadf0e9f66ea144ba16f6e7455c778416))
+
 ## [2.1.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.0.0...v2.1.0) (2024-03-25)
 
 
