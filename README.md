@@ -278,6 +278,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_repository_arn"></a> [repository\_arn](#output\_repository\_arn) | Full ARN of the repository |
+| <a name="output_repository_name"></a> [repository\_name](#output\_repository\_name) | Name of the repository |
 | <a name="output_repository_registry_id"></a> [repository\_registry\_id](#output\_repository\_registry\_id) | The registry ID where the repository was created |
 | <a name="output_repository_url"></a> [repository\_url](#output\_repository\_url) | The URL of the repository |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
