@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.1.1...v2.2.0) (2024-04-05)
+
+
+### Features
+
+* Added repository_name as output ([#37](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/37)) ([d704c6e](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/d704c6e6b88726a9f24c466d38654ab9470de181))
+
 ## [2.1.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.1.0...v2.1.1) (2024-04-03)
 
 
