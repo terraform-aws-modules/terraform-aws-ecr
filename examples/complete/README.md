@@ -62,9 +62,11 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_public_repository_arn"></a> [public\_repository\_arn](#output\_public\_repository\_arn) | Full ARN of the repository |
+| <a name="output_public_repository_name"></a> [public\_repository\_name](#output\_public\_repository\_name) | Name of the repository |
 | <a name="output_public_repository_registry_id"></a> [public\_repository\_registry\_id](#output\_public\_repository\_registry\_id) | The registry ID where the repository was created |
 | <a name="output_public_repository_url"></a> [public\_repository\_url](#output\_public\_repository\_url) | The URL of the repository (in the form `aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName`) |
 | <a name="output_repository_arn"></a> [repository\_arn](#output\_repository\_arn) | Full ARN of the repository |
+| <a name="output_repository_name"></a> [repository\_name](#output\_repository\_name) | Name of the repository |
 | <a name="output_repository_registry_id"></a> [repository\_registry\_id](#output\_repository\_registry\_id) | The registry ID where the repository was created |
 | <a name="output_repository_url"></a> [repository\_url](#output\_repository\_url) | The URL of the repository (in the form `aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName`) |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

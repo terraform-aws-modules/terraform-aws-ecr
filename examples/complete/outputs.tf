@@ -2,6 +2,11 @@
 # Private Repository
 ################################################################################
 
+output "repository_name" {
+  description = "Name of the repository"
+  value       = module.ecr.repository_name
+}
+
 output "repository_arn" {
   description = "Full ARN of the repository"
   value       = module.ecr.repository_arn
@@ -20,6 +25,11 @@ output "repository_url" {
 ################################################################################
 # Public Repository
 ################################################################################
+
+output "public_repository_name" {
+  description = "Name of the repository"
+  value       = module.public_ecr.repository_name
+}
 
 output "public_repository_arn" {
   description = "Full ARN of the repository"

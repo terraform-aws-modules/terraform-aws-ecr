@@ -2,6 +2,11 @@
 # Repository (Public and Private)
 ################################################################################
 
+output "repository_name" {
+  description = "Name of the repository"
+  value       = try(aws_ecr_repository.this[0].name, aws_ecrpublic_repository.this[0].id, null)
+}
+
 output "repository_arn" {
   description = "Full ARN of the repository"
   value       = try(aws_ecr_repository.this[0].arn, aws_ecrpublic_repository.this[0].arn, null)
