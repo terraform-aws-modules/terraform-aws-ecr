@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.2.0...v2.2.1) (2024-04-17)
+
+
+### Bug Fixes
+
+* Add tags variable to public registry resource ([#40](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/40)) ([27f4867](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/27f48679600c7bc86528e0a95a9f221a5e1c5854))
+
 ## [2.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.1.1...v2.2.0) (2024-04-05)
 
 
