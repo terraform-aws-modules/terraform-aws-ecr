@@ -238,6 +238,8 @@ resource "aws_ecrpublic_repository" "this" {
       usage_text        = try(catalog_data.value.usage_text, null)
     }
   }
+
+  tags = var.tags
 }
 
 ################################################################################
