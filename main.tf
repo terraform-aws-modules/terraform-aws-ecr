@@ -1,6 +1,7 @@
 locals {
   create_private_repository = var.create && var.create_repository && var.repository_type == "private"
   create_public_repository  = var.create && var.create_repository && var.repository_type == "public"
+  create_lifecycle_policy   = var.create_lifecycle_policy && var.repository_lifecycle_policy != ""
 }
 
 data "aws_caller_identity" "current" {}
@@ -211,7 +212,7 @@ resource "aws_ecr_repository_policy" "this" {
 ################################################################################
 
 resource "aws_ecr_lifecycle_policy" "this" {
-  count = local.create_private_repository && var.create_lifecycle_policy ? 1 : 0
+  count = local.create_private_repository && local.create_lifecycle_policy ? 1 : 0
 
   repository = aws_ecr_repository.this[0].name
   policy     = var.repository_lifecycle_policy
