@@ -169,6 +169,11 @@ module "ecr_registry" {
     }
   ]
 
+  # Repository Creation Template
+  create_repository_creation_template      = true
+  repository_creation_template_prefix      = "ROOT"
+  repository_creation_template_applied_for = "PULL_THROUGH_CACHE"
+
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -194,13 +199,13 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.37 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.61 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.37 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.61 |
 
 ## Modules
 
@@ -216,6 +221,7 @@ No modules.
 | [aws_ecr_registry_scanning_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_registry_scanning_configuration) | resource |
 | [aws_ecr_replication_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_replication_configuration) | resource |
 | [aws_ecr_repository.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository) | resource |
+| [aws_ecr_repository_creation_template.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_creation_template) | resource |
 | [aws_ecr_repository_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy) | resource |
 | [aws_ecrpublic_repository.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecrpublic_repository) | resource |
 | [aws_ecrpublic_repository_policy.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecrpublic_repository_policy) | resource |
@@ -233,6 +239,7 @@ No modules.
 | <a name="input_create_registry_policy"></a> [create\_registry\_policy](#input\_create\_registry\_policy) | Determines whether a registry policy will be created | `bool` | `false` | no |
 | <a name="input_create_registry_replication_configuration"></a> [create\_registry\_replication\_configuration](#input\_create\_registry\_replication\_configuration) | Determines whether a registry replication configuration will be created | `bool` | `false` | no |
 | <a name="input_create_repository"></a> [create\_repository](#input\_create\_repository) | Determines whether a repository will be created | `bool` | `true` | no |
+| <a name="input_create_repository_creation_template"></a> [create\_repository\_creation\_template](#input\_create\_repository\_creation\_template) | Determines whether a repository creation template will be created | `bool` | `false` | no |
 | <a name="input_create_repository_policy"></a> [create\_repository\_policy](#input\_create\_repository\_policy) | Determines whether a repository policy will be created | `bool` | `true` | no |
 | <a name="input_manage_registry_scanning_configuration"></a> [manage\_registry\_scanning\_configuration](#input\_manage\_registry\_scanning\_configuration) | Determines whether the registry scanning configuration will be managed | `bool` | `false` | no |
 | <a name="input_public_repository_catalog_data"></a> [public\_repository\_catalog\_data](#input\_public\_repository\_catalog\_data) | Catalog data configuration for the repository | `any` | `{}` | no |
@@ -241,6 +248,15 @@ No modules.
 | <a name="input_registry_replication_rules"></a> [registry\_replication\_rules](#input\_registry\_replication\_rules) | The replication rules for a replication configuration. A maximum of 10 are allowed | `any` | `[]` | no |
 | <a name="input_registry_scan_rules"></a> [registry\_scan\_rules](#input\_registry\_scan\_rules) | One or multiple blocks specifying scanning rules to determine which repository filters are used and at what frequency scanning will occur | `any` | `[]` | no |
 | <a name="input_registry_scan_type"></a> [registry\_scan\_type](#input\_registry\_scan\_type) | the scanning type to set for the registry. Can be either `ENHANCED` or `BASIC` | `string` | `"ENHANCED"` | no |
+| <a name="input_repository_creation_template_applied_for"></a> [repository\_creation\_template\_applied\_for](#input\_repository\_creation\_template\_applied\_for) | Which features this template applies to. Must contain one or more of PULL\_THROUGH\_CACHE or REPLICATION. | `list(string)` | <pre>[<br>  "PULL_THROUGH_CACHE"<br>]</pre> | no |
+| <a name="input_repository_creation_template_custom_role_arn"></a> [repository\_creation\_template\_custom\_role\_arn](#input\_repository\_creation\_template\_custom\_role\_arn) | A custom IAM role to use for repository creation. Required if using repository tags or KMS encryption. | `string` | `""` | no |
+| <a name="input_repository_creation_template_description"></a> [repository\_creation\_template\_description](#input\_repository\_creation\_template\_description) | The description for this template. | `string` | `""` | no |
+| <a name="input_repository_creation_template_encryption_type"></a> [repository\_creation\_template\_encryption\_type](#input\_repository\_creation\_template\_encryption\_type) | The encryption type for the repository. Must be one of: `KMS` or `AES256`. Defaults to `AES256` | `string` | `null` | no |
+| <a name="input_repository_creation_template_image_tag_mutability"></a> [repository\_creation\_template\_image\_tag\_mutability](#input\_repository\_creation\_template\_image\_tag\_mutability) | The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE. | `string` | `"MUTABLE"` | no |
+| <a name="input_repository_creation_template_kms_key"></a> [repository\_creation\_template\_kms\_key](#input\_repository\_creation\_template\_kms\_key) | The ARN of the KMS key to use when encryption\_type is `KMS`. If not specified, uses the default AWS managed key for ECR | `string` | `null` | no |
+| <a name="input_repository_creation_template_lifecycle_policy"></a> [repository\_creation\_template\_lifecycle\_policy](#input\_repository\_creation\_template\_lifecycle\_policy) | The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws\_ecr\_lifecycle\_policy\_document data\_source to generate/manage the JSON document used for the lifecycle\_policy argument. | `string` | `""` | no |
+| <a name="input_repository_creation_template_prefix"></a> [repository\_creation\_template\_prefix](#input\_repository\_creation\_template\_prefix) | The repository name prefix to match against. Use ROOT to match any prefix that doesn't explicitly match another template. | `string` | `null` | no |
+| <a name="input_repository_creation_template_repository_policy"></a> [repository\_creation\_template\_repository\_policy](#input\_repository\_creation\_template\_repository\_policy) | The registry policy document to apply to any created repositories. This is a JSON formatted string. For more information about building IAM policy documents with Terraform, see the AWS IAM Policy Document Guide. | `string` | `null` | no |
 | <a name="input_repository_encryption_type"></a> [repository\_encryption\_type](#input\_repository\_encryption\_type) | The encryption type for the repository. Must be one of: `KMS` or `AES256`. Defaults to `AES256` | `string` | `null` | no |
 | <a name="input_repository_force_delete"></a> [repository\_force\_delete](#input\_repository\_force\_delete) | If `true`, will delete the repository even if it contains images. Defaults to `false` | `bool` | `null` | no |
 | <a name="input_repository_image_scan_on_push"></a> [repository\_image\_scan\_on\_push](#input\_repository\_image\_scan\_on\_push) | Indicates whether images are scanned after being pushed to the repository (`true`) or not scanned (`false`) | `bool` | `true` | no |

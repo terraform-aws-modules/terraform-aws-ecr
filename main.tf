@@ -336,3 +336,29 @@ resource "aws_ecr_replication_configuration" "this" {
     }
   }
 }
+
+################################################################################
+# Repository Creation Template
+################################################################################
+
+resource "aws_ecr_repository_creation_template" "this" {
+  count = var.create && var.create_repository_creation_template ? 1 : 0
+
+  prefix               = var.repository_creation_template_prefix
+  description          = var.repository_creation_template_description
+  image_tag_mutability = var.repository_creation_template_image_tag_mutability
+  custom_role_arn      = var.repository_creation_template_custom_role_arn
+
+  applied_for = var.repository_creation_template_applied_for
+
+  encryption_configuration {
+    encryption_type = var.repository_creation_template_encryption_type
+    kms_key         = var.repository_creation_template_kms_key
+  }
+
+  repository_policy = var.repository_creation_template_repository_policy
+
+  lifecycle_policy = var.repository_creation_template_lifecycle_policy
+
+  resource_tags = var.tags
+}

@@ -172,6 +172,11 @@ module "ecr_registry" {
     }]
   }]
 
+  # Registry Replication Configuration
+  create_repository_creation_template      = true
+  repository_creation_template_prefix      = "ROOT"
+  repository_creation_template_applied_for = ["PULL_THROUGH_CACHE"]
+
   tags = local.tags
 }
 

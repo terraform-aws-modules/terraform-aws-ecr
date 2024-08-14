@@ -197,3 +197,67 @@ variable "registry_replication_rules" {
   type        = any
   default     = []
 }
+
+################################################################################
+# Repository Creation Template
+################################################################################
+
+variable "create_repository_creation_template" {
+  description = "Determines whether a repository creation template will be created"
+  type        = bool
+  default     = false
+}
+
+variable "repository_creation_template_prefix" {
+  description = "The repository name prefix to match against. Use ROOT to match any prefix that doesn't explicitly match another template."
+  type        = string
+  default     = null
+}
+
+variable "repository_creation_template_applied_for" {
+  description = "Which features this template applies to. Must contain one or more of PULL_THROUGH_CACHE or REPLICATION."
+  type        = list(string)
+  default     = ["PULL_THROUGH_CACHE"]
+}
+
+variable "repository_creation_template_custom_role_arn" {
+  description = "A custom IAM role to use for repository creation. Required if using repository tags or KMS encryption."
+  type        = string
+  default     = ""
+}
+
+variable "repository_creation_template_description" {
+  description = "The description for this template."
+  type        = string
+  default     = ""
+}
+
+variable "repository_creation_template_image_tag_mutability" {
+  description = "The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE."
+  type        = string
+  default     = "MUTABLE"
+}
+
+variable "repository_creation_template_lifecycle_policy" {
+  description = "The lifecycle policy document to apply to any created repositories. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the lifecycle_policy argument."
+  type        = string
+  default     = ""
+}
+
+variable "repository_creation_template_repository_policy" {
+  description = "The registry policy document to apply to any created repositories. This is a JSON formatted string. For more information about building IAM policy documents with Terraform, see the AWS IAM Policy Document Guide."
+  type        = string
+  default     = null
+}
+
+variable "repository_creation_template_encryption_type" {
+  description = "The encryption type for the repository. Must be one of: `KMS` or `AES256`. Defaults to `AES256`"
+  type        = string
+  default     = null
+}
+
+variable "repository_creation_template_kms_key" {
+  description = "The ARN of the KMS key to use when encryption_type is `KMS`. If not specified, uses the default AWS managed key for ECR"
+  type        = string
+  default     = null
+}
