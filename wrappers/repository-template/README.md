@@ -1,4 +1,4 @@
-# Wrapper for the root module
+# Wrapper for module: `modules/repository-template`
 
 The configuration in this directory contains an implementation of a single module wrapper pattern, which allows managing several copies of a module in places where using the native Terraform 0.13+ `for_each` feature is not feasible (e.g., with Terragrunt).
 
@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/ecr/aws//wrappers"
+  source = "tfr:///terraform-aws-modules/ecr/aws//wrappers/repository-template"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-ecr.git//wrappers?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-ecr.git//wrappers/repository-template?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/ecr/aws//wrappers"
+  source = "terraform-aws-modules/ecr/aws//wrappers/repository-template"
 
   defaults = { # Default values
     create = true
@@ -115,7 +115,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_wrapper"></a> [wrapper](#module\_wrapper) | ../ | n/a |
+| <a name="module_wrapper"></a> [wrapper](#module\_wrapper) | ../../modules/repository-template | n/a |
 
 ## Resources
 

@@ -1,6 +1,6 @@
-# AWS ECR Terraform module
+# Amazon ECR Terraform module
 
-Terraform module which creates AWS ECR resources.
+Terraform module which creates Amazon ECR resources.
 
 ## Usage
 
@@ -187,20 +187,21 @@ Users of Terragrunt can achieve similar results by using modules provided in the
 Examples codified under the [`examples`](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/master/examples) are intended to give users references for how to use the module(s) as well as testing/validating changes to the source code of the module. If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
 - [Complete](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/master/examples/complete)
+- [Repository Template](https://github.com/terraform-aws-modules/terraform-aws-ecr/tree/master/examples/repository-template)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.37 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.61 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.37 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.61 |
 
 ## Modules
 
@@ -264,7 +265,7 @@ No modules.
 | <a name="output_repository_name"></a> [repository\_name](#output\_repository\_name) | Name of the repository |
 | <a name="output_repository_registry_id"></a> [repository\_registry\_id](#output\_repository\_registry\_id) | The registry ID where the repository was created |
 | <a name="output_repository_url"></a> [repository\_url](#output\_repository\_url) | The URL of the repository |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## License
 
