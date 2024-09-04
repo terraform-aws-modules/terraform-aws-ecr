@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.2.1...v2.3.0) (2024-09-04)
+
+
+### Features
+
+* Add support for repository creation template ([#46](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/46)) ([4e93036](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/4e930363ba48a676c7b1a5a4ff492567f77e75c1))
+
 ## [2.2.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.2.0...v2.2.1) (2024-04-17)
 
 
