@@ -84,7 +84,6 @@ data "aws_iam_policy_document" "repository" {
 
         values = var.repository_lambda_read_access_arns
       }
-
     }
   }
 
