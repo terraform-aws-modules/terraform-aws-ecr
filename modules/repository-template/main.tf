@@ -243,7 +243,7 @@ data "aws_iam_policy_document" "this" {
       "ecr:TagResource"
     ]
     resources = [
-      "arn:${data.aws_partition.current[0].partition}:ecr::${data.aws_caller_identity.current[0].account_id}:repository/${local.perm_prefix}"
+      "arn:${data.aws_partition.current[0].partition}:ecr:*:${data.aws_caller_identity.current[0].account_id}:repository/${local.perm_prefix}"
     ]
   }
 

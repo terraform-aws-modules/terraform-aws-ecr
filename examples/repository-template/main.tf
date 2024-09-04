@@ -26,7 +26,7 @@ module "public_ecr_pull_through_cache_repository_template" {
 
   # Template
   description   = "Pull through cache repository template for Public ECR artifacts"
-  prefix        = "public-ecr"
+  prefix        = "ecr-public"
   resource_tags = local.tags
   lifecycle_policy = jsonencode({
     rules = [
@@ -58,7 +58,7 @@ module "dockerhub_pull_through_cache_repository_template" {
 
   # Template
   description   = "Pull through cache repository template for Dockerhub artifacts"
-  prefix        = "dockerhub"
+  prefix        = "docker-hub"
   resource_tags = local.tags
 
   # Pull through cache rule

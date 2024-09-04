@@ -10,20 +10,11 @@ $ terraform plan
 $ terraform apply
 ```
 
-You can validate this example by running the following commands:
-
-```bash
-# Ensure your local CLI is authenticated with ECR
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account-id>.dkr.ecr.us-east-1.amazonaws.com
-
-# Dockerhub pull through cache and repo creation
-docker pull <account-id>.dkr.ecr.us-east-1.amazonaws.com/dockerhub/library/nginx:latest
-
-# Public ECR pull through cache and repo creation
-docker pull <account-id>.dkr.ecr.us-east-1.amazonaws.com/public-ecr/docker/library/nginx:latest
-```
+You can validate this example by running the commands generated in the `example_docker_pull_commands` output value.
 
 Note that this example may create resources which will incur monetary charges on your AWS bill. Run `terraform destroy` when you no longer need these resources.
+
+If you validate the example by using the pull-through cache, you will need to manually clean up these repositories within ECR since they are not manage by Terraform.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -60,7 +51,12 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_example_docker_pull_commands"></a> [example\_docker\_pull\_commands](#output\_example\_docker\_pull\_commands) | Example docker pull commands to test and validate the example |
+| <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | IAM role ARN |
+| <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | IAM role name |
+| <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Stable and unique string identifying the IAM role |
 <!-- END_TF_DOCS -->
 
 Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-ecr/blob/master/LICENSE).
