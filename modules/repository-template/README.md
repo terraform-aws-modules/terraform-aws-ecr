@@ -129,7 +129,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_applied_for"></a> [applied\_for](#input\_applied\_for) | Which features this template applies to. Must contain one or more of `PULL_THROUGH_CACHE` or `REPLICATION`. Defaults to `PULL_THROUGH_CACHE` | `list(string)` | <pre>[<br>  "PULL_THROUGH_CACHE"<br>]</pre> | no |
+| <a name="input_applied_for"></a> [applied\_for](#input\_applied\_for) | Which features this template applies to. Must contain one or more of `PULL_THROUGH_CACHE` or `REPLICATION`. Defaults to `PULL_THROUGH_CACHE` | `list(string)` | <pre>[<br/>  "PULL_THROUGH_CACHE"<br/>]</pre> | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether resources will be created (affects all resources) | `bool` | `true` | no |
 | <a name="input_create_iam_role"></a> [create\_iam\_role](#input\_create\_iam\_role) | Determines whether the ECR service IAM role should be created | `bool` | `true` | no |
 | <a name="input_create_pull_through_cache_rule"></a> [create\_pull\_through\_cache\_rule](#input\_create\_pull\_through\_cache\_rule) | Determines whether a pull through cache rule will be created | `bool` | `false` | no |
