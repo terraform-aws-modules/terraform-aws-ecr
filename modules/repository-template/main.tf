@@ -121,7 +121,7 @@ data "aws_iam_policy_document" "repository" {
     for_each = length(var.repository_read_write_access_arns) > 0 ? [var.repository_read_write_access_arns] : []
 
     content {
-      sid = "ReadWrite"
+      sid = "ECRPublicReadWrite"
 
       principals {
         type        = "AWS"
