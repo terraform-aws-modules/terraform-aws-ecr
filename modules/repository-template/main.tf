@@ -118,27 +118,6 @@ data "aws_iam_policy_document" "repository" {
   }
 
   dynamic "statement" {
-    for_each = length(var.repository_read_write_access_arns) > 0 ? [var.repository_read_write_access_arns] : []
-
-    content {
-      sid = "ReadWrite"
-
-      principals {
-        type        = "AWS"
-        identifiers = statement.value
-      }
-
-      actions = [
-        "ecr-public:BatchCheckLayerAvailability",
-        "ecr-public:CompleteLayerUpload",
-        "ecr-public:InitiateLayerUpload",
-        "ecr-public:PutImage",
-        "ecr-public:UploadLayerPart",
-      ]
-    }
-  }
-
-  dynamic "statement" {
     for_each = var.repository_policy_statements
 
     content {
