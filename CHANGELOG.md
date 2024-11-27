@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.3.0...v2.3.1) (2024-11-27)
+
+
+### Bug Fixes
+
+* Remove Public ECR permissions from repository template permissions ([#51](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/51)) ([1ef222b](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/1ef222bf4744412f5ab343d7b8ebd021d94652a6))
+* Update CI workflow versions to latest ([#48](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/48)) ([124c139](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/124c13976f4cdc061f5b1ddb38bff715eeba2ad5))
+
 ## [2.3.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.2.1...v2.3.0) (2024-09-04)
 
 
