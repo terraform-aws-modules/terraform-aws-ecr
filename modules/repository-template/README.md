@@ -161,9 +161,12 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_create_pull_through_cache_rule"></a> [create\_pull\_through\_cache\_rule](#output\_create\_pull\_through\_cache\_rule) | Determines whether a pull through cache rule will be created |
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | IAM role ARN |
 | <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | IAM role name |
 | <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Stable and unique string identifying the IAM role |
+| <a name="output_prefix"></a> [prefix](#output\_prefix) | The repository name prefix |
+| <a name="output_upstream_registry_url"></a> [upstream\_registry\_url](#output\_upstream\_registry\_url) | The registry URL of the upstream public registry to use as the source for the pull through cache rule |
 <!-- END_TF_DOCS -->
 
 ## License
