@@ -269,9 +269,11 @@ resource "aws_ecr_registry_policy" "this" {
 resource "aws_ecr_pull_through_cache_rule" "this" {
   for_each = { for k, v in var.registry_pull_through_cache_rules : k => v if var.create }
 
-  ecr_repository_prefix = each.value.ecr_repository_prefix
-  upstream_registry_url = each.value.upstream_registry_url
-  credential_arn        = try(each.value.credential_arn, null)
+  ecr_repository_prefix      = each.value.ecr_repository_prefix
+  upstream_registry_url      = each.value.upstream_registry_url
+  credential_arn             = try(each.value.credential_arn, null)
+  custom_role_arn            = try(each.value.custom_role_arn, null)
+  upstream_repository_prefix = try(each.value.upstream_repository_prefix, null)
 }
 
 ################################################################################
