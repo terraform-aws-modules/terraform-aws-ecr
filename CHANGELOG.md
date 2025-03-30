@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.3.1...v2.4.0) (2025-03-30)
+
+
+### Features
+
+* Support private ecr pull through cache ([#55](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/55)) ([2764bd8](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/2764bd8242d9f0a268ef500364bed8486a281f14))
+
 ## [2.3.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.3.0...v2.3.1) (2024-11-27)
 
 
