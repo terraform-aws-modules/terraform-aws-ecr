@@ -127,6 +127,11 @@ module "ecr_registry" {
       upstream_registry_url = "registry-1.docker.io"
       credential_arn        = module.secrets_manager_dockerhub_credentials.secret_arn
     }
+    priv = {
+      ecr_repository_prefix      = local.name
+      upstream_registry_url      = "${data.aws_caller_identity.current.account_id}.dkr.ecr.us-west-2.amazonaws.com"
+      upstream_repository_prefix = "myapp"
+    }
   }
 
   # Registry Scanning Configuration
