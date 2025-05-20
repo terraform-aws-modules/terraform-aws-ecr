@@ -15,10 +15,16 @@ variable "tags" {
 ################################################################################
 
 variable "applied_for" {
-  description = "Which features this template applies to. Must contain one or more of `PULL_THROUGH_CACHE` or `REPLICATION`. Defaults to `PULL_THROUGH_CACHE`"
+  description = "Which features this template applies to. Must contain one or more of: PULL_THROUGH_CACHE or REPLICATION."
   type        = list(string)
   default     = ["PULL_THROUGH_CACHE"]
+
+  validation {
+    condition     = alltrue([for v in var.applied_for : contains(["PULL_THROUGH_CACHE", "REPLICATION"], v)])
+    error_message = "applied_for values must only be 'PULL_THROUGH_CACHE' or 'REPLICATION'."
+  }
 }
+
 
 variable "custom_role_arn" {
   description = "A custom IAM role to use for repository creation. Required if using repository tags or KMS encryption"
@@ -33,10 +39,16 @@ variable "description" {
 }
 
 variable "encryption_type" {
-  description = "The type of encryption to use for any created repositories. Must be one of: `AES256` or `KMS`. Defaults to `AES256`"
+  description = "The type of encryption to use for any created repositories. Must be one of: AES256 or KMS."
   type        = string
   default     = "AES256"
+
+  validation {
+    condition     = contains(["AES256", "KMS"], var.encryption_type)
+    error_message = "encryption_type must be one of: AES256 or KMS."
+  }
 }
+
 
 variable "kms_key_arn" {
   description = "The ARN of the KMS key used to encrypt the repositories created"
@@ -45,10 +57,16 @@ variable "kms_key_arn" {
 }
 
 variable "image_tag_mutability" {
-  description = "The tag mutability setting for any created repositories. Must be one of: `MUTABLE` or `IMMUTABLE`. Defaults to `IMMUTABLE`"
+  description = "The tag mutability setting for any created repositories. Must be one of: MUTABLE or IMMUTABLE."
   type        = string
   default     = "IMMUTABLE"
+
+  validation {
+    condition     = contains(["MUTABLE", "IMMUTABLE"], var.image_tag_mutability)
+    error_message = "image_tag_mutability must be either MUTABLE or IMMUTABLE."
+  }
 }
+
 
 variable "lifecycle_policy" {
   description = "The lifecycle policy document to apply to any created repositories"
