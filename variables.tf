@@ -16,6 +16,12 @@ variable "repository_type" {
   default     = "private"
 }
 
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration."
+  type        = string
+  default     = null
+}
+
 ################################################################################
 # Repository
 ################################################################################

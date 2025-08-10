@@ -199,6 +199,8 @@ resource "aws_ecr_repository" "this" {
     }
   }
 
+  region = var.region
+
   tags = var.tags
 }
 
@@ -211,6 +213,7 @@ resource "aws_ecr_repository_policy" "this" {
 
   repository = aws_ecr_repository.this[0].name
   policy     = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
+  region     = var.region
 }
 
 ################################################################################
@@ -222,6 +225,7 @@ resource "aws_ecr_lifecycle_policy" "this" {
 
   repository = aws_ecr_repository.this[0].name
   policy     = var.repository_lifecycle_policy
+  region     = var.region
 }
 
 ################################################################################
@@ -246,6 +250,8 @@ resource "aws_ecrpublic_repository" "this" {
     }
   }
 
+  region = var.region
+
   tags = var.tags
 }
 
@@ -258,6 +264,7 @@ resource "aws_ecrpublic_repository_policy" "example" {
 
   repository_name = aws_ecrpublic_repository.this[0].repository_name
   policy          = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
+  region          = var.region
 }
 
 ################################################################################
@@ -268,6 +275,7 @@ resource "aws_ecr_registry_policy" "this" {
   count = var.create && var.create_registry_policy ? 1 : 0
 
   policy = var.registry_policy
+  region = var.region
 }
 
 ################################################################################
@@ -282,6 +290,7 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
   credential_arn             = try(each.value.credential_arn, null)
   custom_role_arn            = try(each.value.custom_role_arn, null)
   upstream_repository_prefix = try(each.value.upstream_repository_prefix, null)
+  region                     = try(each.value.region, var.region)
 }
 
 ################################################################################
@@ -292,6 +301,7 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
   count = var.create && var.manage_registry_scanning_configuration ? 1 : 0
 
   scan_type = var.registry_scan_type
+  region    = var.region
 
   dynamic "rule" {
     for_each = var.registry_scan_rules
@@ -317,6 +327,8 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
 
 resource "aws_ecr_replication_configuration" "this" {
   count = var.create && var.create_registry_replication_configuration ? 1 : 0
+
+  region = var.region
 
   replication_configuration {
 

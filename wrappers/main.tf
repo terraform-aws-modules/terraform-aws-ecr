@@ -12,6 +12,7 @@ module "wrapper" {
   create_repository_policy                         = try(each.value.create_repository_policy, var.defaults.create_repository_policy, true)
   manage_registry_scanning_configuration           = try(each.value.manage_registry_scanning_configuration, var.defaults.manage_registry_scanning_configuration, false)
   public_repository_catalog_data                   = try(each.value.public_repository_catalog_data, var.defaults.public_repository_catalog_data, {})
+  region                                           = try(each.value.region, var.defaults.region, null)
   registry_policy                                  = try(each.value.registry_policy, var.defaults.registry_policy, null)
   registry_pull_through_cache_rules                = try(each.value.registry_pull_through_cache_rules, var.defaults.registry_pull_through_cache_rules, {})
   registry_replication_rules                       = try(each.value.registry_replication_rules, var.defaults.registry_replication_rules, [])

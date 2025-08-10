@@ -33,6 +33,7 @@ resource "aws_ecr_repository_creation_template" "this" {
   image_tag_mutability = var.image_tag_mutability
   lifecycle_policy     = var.lifecycle_policy
   prefix               = var.prefix
+  region               = var.region
   repository_policy    = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
 
   resource_tags = var.resource_tags
@@ -169,6 +170,7 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
   credential_arn        = var.credential_arn
   ecr_repository_prefix = var.prefix
   upstream_registry_url = var.upstream_registry_url
+  region                = var.region
 }
 
 ################################################################################
