@@ -68,6 +68,12 @@ variable "repository_force_delete" {
   default     = null
 }
 
+variable "repository_image_tag_mutability_exclusion_filter" {
+  description = "Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION."
+  type        = any
+  default     = []
+}
+
 ################################################################################
 # Repository Policy
 ################################################################################

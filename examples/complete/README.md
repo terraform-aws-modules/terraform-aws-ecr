@@ -28,13 +28,13 @@ Note that this example may create resources which will incur monetary charges on
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.93 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.8 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.93 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.8 |
 
 ## Modules
 
@@ -43,7 +43,6 @@ Note that this example may create resources which will incur monetary charges on
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | ../.. | n/a |
 | <a name="module_ecr_disabled"></a> [ecr\_disabled](#module\_ecr\_disabled) | ../.. | n/a |
 | <a name="module_ecr_registry"></a> [ecr\_registry](#module\_ecr\_registry) | ../.. | n/a |
-| <a name="module_public_ecr"></a> [public\_ecr](#module\_public\_ecr) | ../.. | n/a |
 | <a name="module_secrets_manager_dockerhub_credentials"></a> [secrets\_manager\_dockerhub\_credentials](#module\_secrets\_manager\_dockerhub\_credentials) | terraform-aws-modules/secrets-manager/aws | ~> 1.0 |
 
 ## Resources
@@ -61,10 +60,6 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_public_repository_arn"></a> [public\_repository\_arn](#output\_public\_repository\_arn) | Full ARN of the repository |
-| <a name="output_public_repository_name"></a> [public\_repository\_name](#output\_public\_repository\_name) | Name of the repository |
-| <a name="output_public_repository_registry_id"></a> [public\_repository\_registry\_id](#output\_public\_repository\_registry\_id) | The registry ID where the repository was created |
-| <a name="output_public_repository_url"></a> [public\_repository\_url](#output\_public\_repository\_url) | The URL of the repository (in the form `aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName`) |
 | <a name="output_repository_arn"></a> [repository\_arn](#output\_repository\_arn) | Full ARN of the repository |
 | <a name="output_repository_name"></a> [repository\_name](#output\_repository\_name) | Name of the repository |
 | <a name="output_repository_registry_id"></a> [repository\_registry\_id](#output\_repository\_registry\_id) | The registry ID where the repository was created |

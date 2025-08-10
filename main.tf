@@ -191,6 +191,14 @@ resource "aws_ecr_repository" "this" {
     scan_on_push = var.repository_image_scan_on_push
   }
 
+  dynamic "image_tag_mutability_exclusion_filter" {
+    for_each = var.repository_image_tag_mutability_exclusion_filter
+    content {
+      filter      = image_tag_mutability_exclusion_filter.value.filter
+      filter_type = image_tag_mutability_exclusion_filter.value.filter_type
+    }
+  }
+
   tags = var.tags
 }
 

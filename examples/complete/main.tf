@@ -54,28 +54,45 @@ module "ecr" {
 
   repository_force_delete = true
 
-  tags = local.tags
-}
+  repository_image_tag_mutability = "IMMUTABLE_WITH_EXCLUSION"
 
-module "public_ecr" {
-  source = "../.."
-
-  repository_name = local.name
-  repository_type = "public"
-
-  repository_read_write_access_arns = [data.aws_caller_identity.current.arn]
-
-  public_repository_catalog_data = {
-    description       = "Docker container for some things"
-    about_text        = file("${path.module}/files/ABOUT.md")
-    usage_text        = file("${path.module}/files/USAGE.md")
-    operating_systems = ["Linux"]
-    architectures     = ["x86"]
-    logo_image_blob   = filebase64("${path.module}/files/clowd.png")
-  }
+  repository_image_tag_mutability_exclusion_filter = [
+    {
+      filter      = "latest*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "dev-*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "qa-*"
+      filter_type = "WILDCARD"
+    }
+  ]
 
   tags = local.tags
 }
+
+#module "public_ecr" {
+#  source = "../.."
+#
+#  repository_name = local.name
+#  repository_type = "public"
+#
+#  repository_read_write_access_arns = [data.aws_caller_identity.current.arn]
+#
+#  public_repository_catalog_data = {
+#    description       = "Docker container for some things"
+#    about_text        = file("${path.module}/files/ABOUT.md")
+#    usage_text        = file("${path.module}/files/USAGE.md")
+#    operating_systems = ["Linux"]
+#    architectures     = ["x86"]
+#    logo_image_blob   = filebase64("${path.module}/files/clowd.png")
+#  }
+#
+#  tags = local.tags
+#}
 
 ################################################################################
 # ECR Registry
