@@ -54,8 +54,6 @@ module "ecr" {
 
   repository_force_delete = true
 
-  region = "us-west-2"
-
   repository_image_tag_mutability = "IMMUTABLE_WITH_EXCLUSION"
 
   repository_image_tag_mutability_exclusion_filter = [
