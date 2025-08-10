@@ -74,25 +74,25 @@ module "ecr" {
   tags = local.tags
 }
 
-#module "public_ecr" {
-#  source = "../.."
-#
-#  repository_name = local.name
-#  repository_type = "public"
-#
-#  repository_read_write_access_arns = [data.aws_caller_identity.current.arn]
-#
-#  public_repository_catalog_data = {
-#    description       = "Docker container for some things"
-#    about_text        = file("${path.module}/files/ABOUT.md")
-#    usage_text        = file("${path.module}/files/USAGE.md")
-#    operating_systems = ["Linux"]
-#    architectures     = ["x86"]
-#    logo_image_blob   = filebase64("${path.module}/files/clowd.png")
-#  }
-#
-#  tags = local.tags
-#}
+module "public_ecr" {
+  source = "../.."
+
+  repository_name = local.name
+  repository_type = "public"
+
+  repository_read_write_access_arns = [data.aws_caller_identity.current.arn]
+
+  public_repository_catalog_data = {
+    description       = "Docker container for some things"
+    about_text        = file("${path.module}/files/ABOUT.md")
+    usage_text        = file("${path.module}/files/USAGE.md")
+    operating_systems = ["Linux"]
+    architectures     = ["x86"]
+    logo_image_blob   = filebase64("${path.module}/files/clowd.png")
+  }
+
+  tags = local.tags
+}
 
 ################################################################################
 # ECR Registry
