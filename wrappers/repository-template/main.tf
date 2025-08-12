@@ -25,7 +25,7 @@ module "wrapper" {
   region                             = try(each.value.region, var.defaults.region, null)
   repository_lambda_read_access_arns = try(each.value.repository_lambda_read_access_arns, var.defaults.repository_lambda_read_access_arns, [])
   repository_policy                  = try(each.value.repository_policy, var.defaults.repository_policy, null)
-  repository_policy_statements       = try(each.value.repository_policy_statements, var.defaults.repository_policy_statements, {})
+  repository_policy_statements       = try(each.value.repository_policy_statements, var.defaults.repository_policy_statements, null)
   repository_read_access_arns        = try(each.value.repository_read_access_arns, var.defaults.repository_read_access_arns, [])
   repository_read_write_access_arns  = try(each.value.repository_read_write_access_arns, var.defaults.repository_read_write_access_arns, [])
   resource_tags                      = try(each.value.resource_tags, var.defaults.resource_tags, {})

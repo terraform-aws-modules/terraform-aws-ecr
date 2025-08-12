@@ -129,18 +129,18 @@ data "aws_iam_policy_document" "repository" {
   }
 
   dynamic "statement" {
-    for_each = var.repository_policy_statements
+    for_each = var.repository_policy_statements != null ? var.repository_policy_statements : {}
 
     content {
-      sid           = try(statement.value.sid, null)
-      actions       = try(statement.value.actions, null)
-      not_actions   = try(statement.value.not_actions, null)
-      effect        = try(statement.value.effect, null)
-      resources     = try(statement.value.resources, null)
-      not_resources = try(statement.value.not_resources, null)
+      sid           = statement.value.sid
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -149,7 +149,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.conditions != null ? statement.value.condition : []
 
         content {
           test     = condition.value.test
@@ -192,7 +192,7 @@ resource "aws_ecr_repository" "this" {
   }
 
   dynamic "image_tag_mutability_exclusion_filter" {
-    for_each = var.repository_image_tag_mutability_exclusion_filter
+    for_each = var.repository_image_tag_mutability_exclusion_filter != null ? var.repository_image_tag_mutability_exclusion_filter : []
     content {
       filter      = image_tag_mutability_exclusion_filter.value.filter
       filter_type = image_tag_mutability_exclusion_filter.value.filter_type
@@ -238,7 +238,7 @@ resource "aws_ecrpublic_repository" "this" {
   repository_name = var.repository_name
 
   dynamic "catalog_data" {
-    for_each = length(var.public_repository_catalog_data) > 0 ? [var.public_repository_catalog_data] : []
+    for_each = var.public_repository_catalog_data != null ? [var.public_repository_catalog_data] : []
 
     content {
       about_text        = try(catalog_data.value.about_text, null)
@@ -287,10 +287,10 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
 
   ecr_repository_prefix      = each.value.ecr_repository_prefix
   upstream_registry_url      = each.value.upstream_registry_url
-  credential_arn             = try(each.value.credential_arn, null)
-  custom_role_arn            = try(each.value.custom_role_arn, null)
-  upstream_repository_prefix = try(each.value.upstream_repository_prefix, null)
-  region                     = try(each.value.region, var.region)
+  credential_arn             = each.value.credential_arn
+  custom_role_arn            = each.value.custom_role_arn
+  upstream_repository_prefix = each.value.upstream_repository_prefix
+  region                     = each.value.region != null ? each.value.region : var.region
 }
 
 ################################################################################
@@ -304,7 +304,7 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
   region    = var.region
 
   dynamic "rule" {
-    for_each = var.registry_scan_rules
+    for_each = var.registry_scan_rules != null ? var.registry_scan_rules : []
 
     content {
       scan_frequency = rule.value.scan_frequency
@@ -314,7 +314,7 @@ resource "aws_ecr_registry_scanning_configuration" "this" {
 
         content {
           filter      = repository_filter.value.filter
-          filter_type = try(repository_filter.value.filter_type, "WILDCARD")
+          filter_type = repository_filter.value.filter_type != null ? repository_filter.value.filter_type : "WILDCARD"
         }
       }
     }
@@ -333,7 +333,7 @@ resource "aws_ecr_replication_configuration" "this" {
   replication_configuration {
 
     dynamic "rule" {
-      for_each = var.registry_replication_rules
+      for_each = var.registry_replication_rules != null ? var.registry_replication_rules : []
 
       content {
         dynamic "destination" {
@@ -346,7 +346,7 @@ resource "aws_ecr_replication_configuration" "this" {
         }
 
         dynamic "repository_filter" {
-          for_each = try(rule.value.repository_filters, [])
+          for_each = rule.value.repository_filters != null ? rule.value.repository_filters : []
 
           content {
             filter      = repository_filter.value.filter

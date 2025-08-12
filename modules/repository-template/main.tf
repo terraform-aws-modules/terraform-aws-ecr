@@ -119,7 +119,7 @@ data "aws_iam_policy_document" "repository" {
   }
 
   dynamic "statement" {
-    for_each = var.repository_policy_statements
+    for_each = var.repository_policy_statements != null ? var.repository_policy_statements : {}
 
     content {
       sid           = try(statement.value.sid, null)
@@ -130,7 +130,7 @@ data "aws_iam_policy_document" "repository" {
       not_resources = try(statement.value.not_resources, null)
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -139,7 +139,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -148,7 +148,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.conditions != null ? statement.value.conditions : []
 
         content {
           test     = condition.value.test
