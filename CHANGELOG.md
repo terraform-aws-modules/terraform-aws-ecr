@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.4.0...v3.0.0) (2025-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Tag Mutability Exclusion Filters and AWS Provider MSV 6 / Terraform MSV 1.5.7  (#59)
+
+### Features
+
+* Tag Mutability Exclusion Filters and AWS Provider MSV 6 / Terraform MSV 1.5.7  ([#59](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/59)) ([58028e3](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/58028e3fef920f1397b47d0da39fb2b86f4a2ea5))
+
 ## [2.4.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.3.1...v2.4.0) (2025-03-30)
 
 
