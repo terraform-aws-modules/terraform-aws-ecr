@@ -16,6 +16,12 @@ variable "repository_type" {
   default     = "private"
 }
 
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration."
+  type        = string
+  default     = null
+}
+
 ################################################################################
 # Repository
 ################################################################################
@@ -68,6 +74,15 @@ variable "repository_force_delete" {
   default     = null
 }
 
+variable "repository_image_tag_mutability_exclusion_filter" {
+  description = "Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION."
+  type = list(object({
+    filter      = string
+    filter_type = string
+  }))
+  default = null
+}
+
 ################################################################################
 # Repository Policy
 ################################################################################
@@ -104,8 +119,28 @@ variable "repository_read_write_access_arns" {
 
 variable "repository_policy_statements" {
   description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage"
-  type        = any
-  default     = {}
+  type = map(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string)
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    conditions = optional(list(object({
+      test     = string
+      values   = list(string)
+      variable = string
+    })))
+  }))
+  default = null
 }
 
 ################################################################################
@@ -130,8 +165,15 @@ variable "repository_lifecycle_policy" {
 
 variable "public_repository_catalog_data" {
   description = "Catalog data configuration for the repository"
-  type        = any
-  default     = {}
+  type = object({
+    about_text        = optional(string)
+    architectures     = optional(list(string))
+    description       = optional(string)
+    logo_image_blob   = optional(string)
+    operating_systems = optional(list(string))
+    usage_text        = optional(string)
+  })
+  default = null
 }
 
 ################################################################################
@@ -156,8 +198,15 @@ variable "registry_policy" {
 
 variable "registry_pull_through_cache_rules" {
   description = "List of pull through cache rules to create"
-  type        = map(map(string))
-  default     = {}
+  type = map(object({
+    ecr_repository_prefix      = string
+    upstream_registry_url      = string
+    credential_arn             = optional(string)
+    custom_role_arn            = optional(string)
+    upstream_repository_prefix = optional(string)
+    region                     = optional(string)
+  }))
+  default = {}
 }
 
 ################################################################################
@@ -178,8 +227,14 @@ variable "registry_scan_type" {
 
 variable "registry_scan_rules" {
   description = "One or multiple blocks specifying scanning rules to determine which repository filters are used and at what frequency scanning will occur"
-  type        = any
-  default     = []
+  type = list(object({
+    scan_frequency = string
+    filter = list(object({
+      filter      = string
+      filter_type = optional(string)
+    }))
+  }))
+  default = null
 }
 
 ################################################################################
@@ -194,6 +249,15 @@ variable "create_registry_replication_configuration" {
 
 variable "registry_replication_rules" {
   description = "The replication rules for a replication configuration. A maximum of 10 are allowed"
-  type        = any
-  default     = []
+  type = list(object({
+    destinations = list(object({
+      region      = string
+      registry_id = string
+    }))
+    repository_filters = optional(list(object({
+      filter      = string
+      filter_type = string
+    })))
+  }))
+  default = null
 }

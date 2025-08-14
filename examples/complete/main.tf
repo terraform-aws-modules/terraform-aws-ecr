@@ -54,6 +54,23 @@ module "ecr" {
 
   repository_force_delete = true
 
+  repository_image_tag_mutability = "IMMUTABLE_WITH_EXCLUSION"
+
+  repository_image_tag_mutability_exclusion_filter = [
+    {
+      filter      = "latest*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "dev-*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "qa-*"
+      filter_type = "WILDCARD"
+    }
+  ]
+
   tags = local.tags
 }
 

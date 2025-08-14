@@ -33,6 +33,7 @@ resource "aws_ecr_repository_creation_template" "this" {
   image_tag_mutability = var.image_tag_mutability
   lifecycle_policy     = var.lifecycle_policy
   prefix               = var.prefix
+  region               = var.region
   repository_policy    = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
 
   resource_tags = var.resource_tags
@@ -118,7 +119,7 @@ data "aws_iam_policy_document" "repository" {
   }
 
   dynamic "statement" {
-    for_each = var.repository_policy_statements
+    for_each = var.repository_policy_statements != null ? var.repository_policy_statements : {}
 
     content {
       sid           = try(statement.value.sid, null)
@@ -129,7 +130,7 @@ data "aws_iam_policy_document" "repository" {
       not_resources = try(statement.value.not_resources, null)
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -138,7 +139,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -147,7 +148,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.conditions != null ? statement.value.conditions : []
 
         content {
           test     = condition.value.test
@@ -169,6 +170,7 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
   credential_arn        = var.credential_arn
   ecr_repository_prefix = var.prefix
   upstream_registry_url = var.upstream_registry_url
+  region                = var.region
 }
 
 ################################################################################
