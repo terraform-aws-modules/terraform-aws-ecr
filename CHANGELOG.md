@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.0.0...v3.0.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* Dynamic condition typo in repository_policy_statements logic ([#60](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/60)) ([0adb5f6](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/0adb5f6cea4957cd15bfbbf9b481ad18b91ba259))
+
 ## [3.0.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v2.4.0...v3.0.0) (2025-08-14)
 
 
