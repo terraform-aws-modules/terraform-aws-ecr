@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "repository" {
       }
 
       dynamic "condition" {
-        for_each = statement.value.conditions != null ? statement.value.condition : []
+        for_each = statement.value.conditions != null ? statement.value.conditions : []
 
         content {
           test     = condition.value.test
