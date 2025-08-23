@@ -50,6 +50,22 @@ module "public_ecr_pull_through_cache_repository_template" {
   create_pull_through_cache_rule = true
   upstream_registry_url          = "public.ecr.aws"
 
+  image_tag_mutability = "MUTABLE_WITH_EXCLUSION"
+  image_tag_mutability_exclusion_filter = [
+    {
+      filter      = "latest*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "dev-*"
+      filter_type = "WILDCARD"
+    },
+    {
+      filter      = "qa-*"
+      filter_type = "WILDCARD"
+    }
+  ]
+
   tags = local.tags
 }
 
