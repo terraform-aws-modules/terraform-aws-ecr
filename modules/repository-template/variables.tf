@@ -50,6 +50,15 @@ variable "kms_key_arn" {
   default     = null
 }
 
+variable "image_tag_mutability_exclusion_filter" {
+  description = "Configuration block that defines filters to specify which image tags can override the default tag mutability setting. Only applicable when image_tag_mutability is set to IMMUTABLE_WITH_EXCLUSION or MUTABLE_WITH_EXCLUSION."
+  type = list(object({
+    filter      = string
+    filter_type = string
+  }))
+  default = null
+}
+
 variable "image_tag_mutability" {
   description = "The tag mutability setting for any created repositories. Must be one of: `MUTABLE` or `IMMUTABLE`. Defaults to `IMMUTABLE`"
   type        = string
