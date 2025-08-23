@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.0.1...v3.1.0) (2025-08-23)
+
+
+### Features
+
+* Support `image_tag_mutability_exclusion_filter` for `aws_ecr_repository_creation_template` ([#62](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/62)) ([01c4697](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/01c469738d8196787b944273bd11a06fff6867ab))
+
 ## [3.0.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.0.0...v3.0.1) (2025-08-15)
 
 
