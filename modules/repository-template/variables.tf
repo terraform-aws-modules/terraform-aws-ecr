@@ -60,7 +60,7 @@ variable "image_tag_mutability_exclusion_filter" {
 }
 
 variable "image_tag_mutability" {
-  description = "The tag mutability setting for any created repositories. Must be one of: `MUTABLE` or `IMMUTABLE`. Defaults to `IMMUTABLE`"
+  description = "The tag mutability setting for any created repositories. Must be one of: `MUTABLE`, `MUTABLE_WITH_EXCLUSION`, `IMMUTABLE`, or `IMMUTABLE_WITH_EXCLUSION`. Defaults to `IMMUTABLE`"
   type        = string
   default     = "IMMUTABLE"
 }
