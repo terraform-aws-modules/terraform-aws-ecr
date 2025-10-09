@@ -111,6 +111,19 @@ variable "upstream_registry_url" {
   default     = null
 }
 
+# named this way because the repository_template already uses a variable with the same name
+variable "cache_rule_custom_role_arn" {
+  description = "The ARN of the IAM role associated with the pull through cache rule. Must be specified if the upstream registry is a cross-account ECR private registry."
+  type        = string
+  default     = null
+}
+
+variable "upstream_repository_prefix" {
+  description = "(Optional) The upstream repository prefix associated with the pull through cache rule. Used if the upstream registry is an ECR private registry. If not specified, it's set to ROOT, which allows matching with any upstream repository."
+  type        = string
+  default     = null
+}
+
 ################################################################################
 # Repository Policy
 ################################################################################

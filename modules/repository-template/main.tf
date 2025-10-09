@@ -179,6 +179,9 @@ resource "aws_ecr_pull_through_cache_rule" "this" {
   ecr_repository_prefix = var.prefix
   upstream_registry_url = var.upstream_registry_url
   region                = var.region
+
+  custom_role_arn            = try(var.cache_rule_custom_role_arn, null)
+  upstream_repository_prefix = try(var.value.upstream_repository_prefix, null)
 }
 
 ################################################################################
