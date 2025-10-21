@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.1.0...v3.1.1) (2025-10-21)
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#66](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/66)) ([78c6d5d](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/78c6d5d42fad7c670b1cc692f17786e8978a7290))
+
 ## [3.1.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.0.1...v3.1.0) (2025-08-23)
 
 
