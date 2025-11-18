@@ -36,6 +36,14 @@ variable "repository_name" {
   description = "The name of the repository"
   type        = string
   default     = ""
+
+  validation {
+    condition = can(regex(
+      "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+      var.repository_name_check
+    ))
+    error_message = "Invalid repository_name: must be lowercase and match ^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+  }
 }
 
 variable "repository_image_tag_mutability" {
