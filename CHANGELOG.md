@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.1.1...v3.2.0) (2026-01-08)
+
+### Features
+
+* Add provider meta user-agent ([#68](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/68)) ([fe99b87](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/fe99b87d45a9923a8c8c7a2efac2bf36f181ae02))
+
 ## [3.1.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.1.0...v3.1.1) (2025-10-21)
 
 ### Bug Fixes
