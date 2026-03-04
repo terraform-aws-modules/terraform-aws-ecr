@@ -212,7 +212,7 @@ resource "aws_ecr_repository_policy" "this" {
   count = local.create_private_repository && var.attach_repository_policy ? 1 : 0
 
   repository = aws_ecr_repository.this[0].name
-  policy     = var.registry_policy
+  policy     = var.repository_policy
   region     = var.region
 }
 
