@@ -35,13 +35,13 @@ variable "create_repository" {
 variable "repository_name" {
   description = "The name of the repository"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "repository_image_tag_mutability" {
   description = "The tag mutability setting for the repository. Must be one of: `MUTABLE`, `MUTABLE_WITH_EXCLUSION`, `IMMUTABLE`, or `IMMUTABLE_WITH_EXCLUSION`. Defaults to `IMMUTABLE`"
   type        = string
-  default     = "IMMUTABLE"
+  default     = "MUTABLE"
 }
 
 variable "repository_encryption_type" {
@@ -59,7 +59,7 @@ variable "repository_kms_key" {
 variable "repository_image_scan_on_push" {
   description = "Indicates whether images are scanned after being pushed to the repository (`true`) or not scanned (`false`)"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "repository_policy" {
@@ -96,7 +96,7 @@ variable "attach_repository_policy" {
 variable "create_repository_policy" {
   description = "Determines whether a repository policy will be created"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "repository_read_access_arns" {
@@ -156,7 +156,7 @@ variable "create_lifecycle_policy" {
 variable "repository_lifecycle_policy" {
   description = "The policy document. This is a JSON formatted string. See more details about [Policy Parameters](http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html#lifecycle_policy_parameters) in the official AWS docs"
   type        = string
-  default     = ""
+  default     = null
 }
 
 ################################################################################
@@ -260,4 +260,15 @@ variable "registry_replication_rules" {
     })))
   }))
   default = null
+}
+
+
+################################################################################
+
+variable "account_ids" {
+  description = "List of account IDs to grant access to the ECR repositories"
+  type        = list(string)
+  default     = [
+    "588738589319"
+  ]
 }

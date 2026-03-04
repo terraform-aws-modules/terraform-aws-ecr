@@ -212,7 +212,7 @@ resource "aws_ecr_repository_policy" "this" {
   count = local.create_private_repository && var.attach_repository_policy ? 1 : 0
 
   repository = aws_ecr_repository.this[0].name
-  policy     = var.create_repository_policy ? data.aws_iam_policy_document.repository[0].json : var.repository_policy
+  policy     = templatefile("${path.module}/ecr_repo_policy.json.tftpl", { account_ids = var.account_ids })
   region     = var.region
 }
 
@@ -224,7 +224,7 @@ resource "aws_ecr_lifecycle_policy" "this" {
   count = local.create_private_repository && var.create_lifecycle_policy ? 1 : 0
 
   repository = aws_ecr_repository.this[0].name
-  policy     = var.repository_lifecycle_policy
+  policy     = file("${path.module}/ecr_repo_lifecycle_policy.json")
   region     = var.region
 }
 
