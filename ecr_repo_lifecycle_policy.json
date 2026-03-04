@@ -1,0 +1,105 @@
+{
+  "rules": [
+    {
+      "rulePriority": 10,
+      "description": "keep last 10 images for prod",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "master",
+          "docker-build"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 10
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 20,
+      "description": "keep last 10 images for dev",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "dev"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 10
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 30,
+      "description": "keep last 10 images for beta",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "beta"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 10
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 40,
+      "description": "keep last 10 images for stage",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "stage"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 10
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 50,
+      "description": "keep last 10 images for prep",
+      "selection": {
+        "tagStatus": "tagged",
+        "tagPrefixList": [
+          "prep"
+        ],
+        "countType": "imageCountMoreThan",
+        "countNumber": 10
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 100,
+      "description": "expire the untagged images after 30 days",
+      "selection": {
+        "tagStatus": "untagged",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 30
+      },
+      "action": {
+        "type": "expire"
+      }
+    },
+    {
+      "rulePriority": 200,
+      "description": "keep last 10 images for anything else",
+      "selection": {
+        "tagStatus": "any",
+        "countType": "imageCountMoreThan",
+        "countNumber": 60
+      },
+      "action": {
+        "type": "expire"
+      }
+    }
+  ]
+}

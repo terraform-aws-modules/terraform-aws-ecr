@@ -1,0 +1,32 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "new statement",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": ${jsonencode(account_ids)}
+        },
+        "Action": [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:BatchGetImage",
+          "ecr:BatchGetRepositoryScanningConfiguration",
+          "ecr:CompleteLayerUpload",
+          "ecr:CreatePullThroughCacheRule",
+          "ecr:DescribeImageReplicationStatus",
+          "ecr:DescribeImageScanFindings",
+          "ecr:DescribeImages",
+          "ecr:DescribePullThroughCacheRules",
+          "ecr:DescribeRegistry",
+          "ecr:DescribeRepositories",
+          "ecr:DescribeRepositoryCreationTemplate",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:InitiateLayerUpload",
+          "ecr:ListImages",
+          "ecr:PutImage",
+          "ecr:UploadLayerPart",
+          "ecr:ValidatePullThroughCacheRule"
+        ]
+      }
+    ]
+  }
