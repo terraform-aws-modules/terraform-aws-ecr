@@ -26,7 +26,7 @@ module "wrapper" {
   repository_kms_key                               = try(each.value.repository_kms_key, var.defaults.repository_kms_key, null)
   repository_lambda_read_access_arns               = try(each.value.repository_lambda_read_access_arns, var.defaults.repository_lambda_read_access_arns, [])
   repository_lifecycle_policy                      = try(each.value.repository_lifecycle_policy, var.defaults.repository_lifecycle_policy, "")
-  repository_name                                  = try(each.value.repository_name, var.defaults.repository_name, "")
+  repository_name                                  = try(each.value.repository_name, var.defaults.repository_name, each.key)
   repository_policy                                = try(each.value.repository_policy, var.defaults.repository_policy, null)
   repository_policy_statements                     = try(each.value.repository_policy_statements, var.defaults.repository_policy_statements, null)
   repository_read_access_arns                      = try(each.value.repository_read_access_arns, var.defaults.repository_read_access_arns, [])
