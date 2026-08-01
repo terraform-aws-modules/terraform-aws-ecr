@@ -20,20 +20,20 @@ If you validate the example by using the pull-through cache, you will need to ma
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.28 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_disabled"></a> [disabled](#module\_disabled) | ../../modules/repository-template | n/a |
 | <a name="module_dockerhub_pull_through_cache_repository_template"></a> [dockerhub\_pull\_through\_cache\_repository\_template](#module\_dockerhub\_pull\_through\_cache\_repository\_template) | ../../modules/repository-template | n/a |
 | <a name="module_public_ecr_pull_through_cache_repository_template"></a> [public\_ecr\_pull\_through\_cache\_repository\_template](#module\_public\_ecr\_pull\_through\_cache\_repository\_template) | ../../modules/repository-template | n/a |
@@ -42,7 +42,7 @@ If you validate the example by using the pull-through cache, you will need to ma
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
@@ -52,7 +52,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_example_docker_pull_commands"></a> [example\_docker\_pull\_commands](#output\_example\_docker\_pull\_commands) | Example docker pull commands to test and validate the example |
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | IAM role ARN |
 | <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | IAM role name |

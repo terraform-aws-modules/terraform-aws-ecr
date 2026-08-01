@@ -26,20 +26,20 @@ Note that this example may create resources which will incur monetary charges on
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.28 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | ../.. | n/a |
 | <a name="module_ecr_disabled"></a> [ecr\_disabled](#module\_ecr\_disabled) | ../.. | n/a |
 | <a name="module_ecr_registry"></a> [ecr\_registry](#module\_ecr\_registry) | ../.. | n/a |
@@ -49,7 +49,7 @@ Note that this example may create resources which will incur monetary charges on
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
@@ -60,7 +60,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_public_repository_arn"></a> [public\_repository\_arn](#output\_public\_repository\_arn) | Full ARN of the repository |
 | <a name="output_public_repository_name"></a> [public\_repository\_name](#output\_public\_repository\_name) | Name of the repository |
 | <a name="output_public_repository_registry_id"></a> [public\_repository\_registry\_id](#output\_public\_repository\_registry\_id) | The registry ID where the repository was created |
