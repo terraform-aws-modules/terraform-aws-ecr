@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.1](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.2.0...v3.2.1) (2026-08-26)
+
+### Bug Fixes
+
+* Update GitHub Actions and pre-commit hook versions ([#74](https://github.com/terraform-aws-modules/terraform-aws-ecr/issues/74)) ([f828d28](https://github.com/terraform-aws-modules/terraform-aws-ecr/commit/f828d28400ea52d70179118485538f10f449055b))
+
 ## [3.2.0](https://github.com/terraform-aws-modules/terraform-aws-ecr/compare/v3.1.1...v3.2.0) (2026-01-08)
 
 ### Features
